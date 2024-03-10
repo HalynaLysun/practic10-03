@@ -6,3 +6,7 @@ export function createAllProdacts(array) {
     )
     .join('');
 }
+
+export function createProdactMarkup({ thumbnail, title, price }) {
+  return `<div><img src="${thumbnail}" alt=""><h3>brand: ${title}</h3><p>price: ${price}</p></div>`;
+}
