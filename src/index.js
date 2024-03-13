@@ -5,26 +5,19 @@ import {
   createAllProdacts,
   createProdactMarkup,
 } from './services/markupService';
+import { pushNewProduct } from './requests/posts';
 
-// getAllProducts().then(console.log)
-
-// console.log(getAllProducts());
 const list = document.querySelector('#allProducts');
 const productForm = document.querySelector('#singleProductForm');
 const containerProduct = document.querySelector('#singleProduct');
-// console.log(list);
-// console.log(productForm);
 
 productForm.addEventListener('submit', handlerFormSubmit);
 
 async function handlerFormSubmit(event) {
   event.preventDefault();
   const id = event.currentTarget.elements.id.value;
-  console.log(id);
   const data = await getProductById(id);
   containerProduct.innerHTML = createProdactMarkup(data);
-
-  console.log(data);
 }
 
 async function renderAllProdacts() {
@@ -34,3 +27,16 @@ async function renderAllProdacts() {
   list.innerHTML = markup;
 }
 // renderAllProdacts();
+
+const formPushNewProduct = document.querySelector('#newProduct');
+
+async function handlerSubForm(event) {
+  event.preventDefault();
+  const title = event.target.title.value;
+  const description = event.target.description.value;
+  const price = event.target.price.value;
+  const data = await pushNewProduct(title, description, price);
+  console.log(data);
+}
+
+formPushNewProduct.addEventListener('submit', handlerSubForm);
